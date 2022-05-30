@@ -4,9 +4,7 @@ import org.junit.jupiter.api.*;
 import java.util.*;
 
 public class CollectionTestSuite {
-
     private static OddNumbersExterminator oddNumbersExterminator;
-
     @BeforeEach
     public void before() {
         System.out.println("Test case: begin");
@@ -15,15 +13,12 @@ public class CollectionTestSuite {
     public void after() {
         System.out.println("Test case: end");
     }
-
     @BeforeAll
     public static void beforeClass() {
         oddNumbersExterminator = new OddNumbersExterminator();
     }
-
     @DisplayName
             ("Checking if the class behaves correctly, " + "when the list is empty")
-
     @Test
     void testOddNumbersExterminatorEmptyList(){
 
@@ -37,7 +32,6 @@ public class CollectionTestSuite {
         //Then
         Assertions.assertEquals(emptyList, newEmptyList);
     }
-
     @DisplayName
             ("Chcecking if the class behaves correctly, " + "when the list contains even and odd numbers")
 
