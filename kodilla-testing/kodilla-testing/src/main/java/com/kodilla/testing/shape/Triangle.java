@@ -45,6 +45,26 @@ public class Triangle implements Shape{
 
     @Override
     public double getField() {
-        return 0; // tutaj dokoncz obliczanie paterna Hersona
+        if (checkTriangleCondition()) {
+            double halfOfCircuit = getHalfOfTheCircuit();
+            return hersonPattern(halfOfCircuit);
+        }else{
+            return 0;
+        }
     }
+
+    private double getHalfOfTheCircuit(){
+        return (edgeA + edgeB + edgeC)/2;
+    }
+
+    private boolean checkTriangleCondition (){
+        return (edgeA + edgeB > edgeC &&
+                edgeA + edgeC > edgeB &&
+                edgeB +edgeC > edgeA);
+    }
+
+    private double hersonPattern(double halfOfCircuit){
+        return Math.sqrt(halfOfCircuit*(edgeA-halfOfCircuit)*(halfOfCircuit-edgeB)*(halfOfCircuit-edgeC));
+    }
+
 }
