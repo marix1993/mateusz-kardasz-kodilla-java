@@ -16,6 +16,7 @@ public class Triangle implements Shape{
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
+        if (o == null) return false;
         if (!(o instanceof Triangle)) return false;
 
         Triangle triangle = (Triangle) o;
