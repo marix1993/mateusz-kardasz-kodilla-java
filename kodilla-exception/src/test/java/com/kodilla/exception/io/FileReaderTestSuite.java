@@ -30,6 +30,5 @@ class FileReaderTestSuite {
                 () -> assertThrows(FileReaderException.class, () -> fileReader.readFile("nie_ma_takiego_pliku.txt")),
                 () -> assertThrows(FileReaderException.class, () -> fileReader.readFile(null)),
                 () -> assertDoesNotThrow(() -> fileReader.readFile("names.txt")));
-
     }
 }

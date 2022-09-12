@@ -17,26 +17,25 @@ ext {
     junitVersion = '5.8.2'
 }
 
-sourceCompatibility = '11'
-targetCompatibility = '11'
+sourceCompatibility = '18'
+targetCompatibility = '18'
 
 tasks.withType(JavaCompile) {
     options.encoding = 'UTF-8'
 }
 
 application {
-    mainModule = 'com.example.kodillaexception'
-    mainClass = 'com.example.kodillaexception.HelloApplication'
+    mainModule = 'com.example.kodillagoodpatterns'
+    mainClass = 'com.example.kodillagoodpatterns.HelloApplication'
 }
 
 javafx {
-    version = '11.0.2'
+    version = '18'
     modules = ['javafx.controls', 'javafx.fxml']
 }
 
 dependencies {
 
-    implementation 'org.testng:testng:7.1.0'
     testImplementation("org.junit.jupiter:junit-jupiter-api:${junitVersion}")
     testRuntimeOnly("org.junit.jupiter:junit-jupiter-engine:${junitVersion}")
 }
