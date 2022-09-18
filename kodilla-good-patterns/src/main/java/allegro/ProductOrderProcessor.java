@@ -13,21 +13,25 @@ public class ProductOrderProcessor {
     }
 
     public ProductOrderDto process(ProductOrderRequest productOrderRequest) {
-        boolean isSold = productOrderService.sold(productOrderRequest.getUser(),
+        boolean isSold = productOrderService.sold(
+                productOrderRequest.getUser(),
                 productOrderRequest.getOrderDate(),
                 productOrderRequest.getProduct(),
                 productOrderRequest.getQuantity());
 
         if (isSold) {
-            informationService.inform(productOrderRequest.getUser());
-            productOrderRepository.createOrder(productOrderRequest.getUser(),
+            informationService.inform(
+                    productOrderRequest.getUser());
+            productOrderRepository.createOrder(
+                    productOrderRequest.getUser(),
                     productOrderRequest.getOrderDate(),
                     productOrderRequest.getProduct(),
                     productOrderRequest.getQuantity());
         } else {
             System.out.println("Order rejected");
         }
-        return new ProductOrderDto(productOrderRequest.getUser(),
+        return new ProductOrderDto(
+                productOrderRequest.getUser(),
                 productOrderRequest.getOrderDate(),
                 productOrderRequest.getProduct(),
                 productOrderRequest.getQuantity(),
