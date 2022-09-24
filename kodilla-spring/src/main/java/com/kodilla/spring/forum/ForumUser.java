@@ -5,7 +5,7 @@ import org.springframework.stereotype.Component;
 @Component
 public class ForumUser {
 
-    public String username;
+    private String username;
 
     public ForumUser() {
         username = "John Smith";
