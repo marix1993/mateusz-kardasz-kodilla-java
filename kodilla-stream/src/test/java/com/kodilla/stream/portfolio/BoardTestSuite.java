@@ -4,8 +4,7 @@ import org.junit.jupiter.api.Test;
 
 import java.time.LocalDate;
 import java.time.Period;
-import java.util.ArrayList;
-import java.util.List;
+import java.util.*;
 
 import static java.util.stream.Collectors.toList;
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -127,55 +126,56 @@ class BoardTestSuite {
 
     @Test
     void testdTaskListFindLongTasks() {
-            //Given
-            Board project = prepareTestData();
+        //Given
+        Board project = prepareTestData();
 
-            //When
-            List<TaskList> inProgressTasks = new ArrayList<>();
-            inProgressTasks.add(new TaskList("In progress"));
-            long longTasks = project.getTaskLists().stream()
-                    .filter(inProgressTasks::contains)
-                    .flatMap(tl -> tl.getTasks().stream())
-                    .map(Task::getCreated)
-                    .filter(d -> d.compareTo(LocalDate.now().minusDays(10)) <= 0)
-                    .count();
+        //When
+        List<TaskList> inProgressTasks = new ArrayList<>();
+        inProgressTasks.add(new TaskList("In progress"));
+        long longTasks = project.getTaskLists().stream()
+                .filter(inProgressTasks::contains)
+                .flatMap(tl -> tl.getTasks().stream())
+                .map(Task::getCreated)
+                .filter(d -> d.compareTo(LocalDate.now().minusDays(10)) <= 0)
+                .count();
 
-            //Then
-            assertEquals(2, longTasks);
-        }
+        //Then
+        assertEquals(2, longTasks);
+    }
 
     @Test
     void testAddTaskListAverageWorkingOnTask() {
         //Given
         Board project = prepareTestData();
         //When
-        List<TaskList>inProgressTasks = new ArrayList<>();
-        inProgressTasks.add(new TaskList("In Progress"));
+        List<TaskList> inProgressTasks = new ArrayList<>();
+        inProgressTasks.add(new TaskList("In progress"));
 
-        double average = project.getTaskLists().stream()
+        int sumOfDays = project.getTaskLists().stream()
                 .filter(inProgressTasks::contains)
-                .flatMap(tl->tl.getTasks().stream())
+                .flatMap(tl -> tl.getTasks().stream())
+                .map(task -> Period.between(task.getCreated(), LocalDate.now()).getDays())
+                .reduce(0, (sum, current) -> sum += current);
+
+        int tasksQty = project.getTaskLists().stream()
+                .filter(inProgressTasks::contains)
+                .flatMap(tl -> tl.getTasks().stream())
+                .map(task -> Period.between(task.getCreated(), LocalDate.now()).getDays())
+                .map(t -> 1)
+                .reduce(0, (sum, current) -> sum += current);
+
+        double average = sumOfDays / tasksQty;
+
+        double avg = project.getTaskLists().stream()
+                .filter(inProgressTasks::contains)
+                .flatMap(tl -> tl.getTasks().stream())
                 .map(task -> Period.between(task.getCreated(), LocalDate.now()).getDays())
                 .mapToInt(Integer::intValue)
                 .average()
                 .getAsDouble();
 
-        int sumOfDays = project.getTaskLists().stream()
-                .filter(inProgressTasks::contains)
-                .flatMap(tl->tl.getTasks().stream())
-                .map(task->Period.between(task.getCreated(), LocalDate.now()).getDays())
-                .reduce(0,(sum, current)->sum+=current);
-
-        int tasksQuantity = project.getTaskLists().stream()
-                .filter(inProgressTasks::contains)
-                .flatMap(tl->tl.getTasks().stream())
-                .map(task->Period.between(task.getCreated(), LocalDate.now()).getDays())
-                .map(t->1)
-                .reduce(0, (sum,current)->sum+=current);
-
-                double averageDays = sumOfDays/tasksQuantity;
-
-                assertEquals(10, averageDays);
-                assertEquals(10, average);
+        //Then
+        assertEquals(10.0, average, 0.0001);
+        assertEquals(10.0, avg, 0.0001);
     }
 }

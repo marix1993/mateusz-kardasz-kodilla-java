@@ -1,4 +1,3 @@
-
 plugins {
     id 'java'
     id 'application'
@@ -6,7 +5,7 @@ plugins {
     id 'org.beryx.jlink' version '2.24.1'
 }
 
-group 'com.example'
+group 'com.kodilla.spring'
 version '1.0-SNAPSHOT'
 
 repositories {
@@ -25,7 +24,8 @@ tasks.withType(JavaCompile) {
 }
 
 application {
-    mainModule = 'com.example.kodillagoodpatterns'
+    mainModule = 'com.kodilla.spring.kodillaspringintro'
+    mainClass = 'com.kodilla.spring.kodillaspringintro.HelloApplication'
 }
 
 javafx {
@@ -35,13 +35,13 @@ javafx {
 
 dependencies {
 
-    implementation 'org.testng:testng:7.6.1'
-    implementation 'junit:junit:4.13.2'
     testImplementation("org.junit.jupiter:junit-jupiter-api:${junitVersion}")
     testRuntimeOnly("org.junit.jupiter:junit-jupiter-engine:${junitVersion}")
-    testImplementation 'org.mockito:mockito-junit-jupiter:4.8.0'
     testImplementation 'org.junit.jupiter:junit-jupiter-api:5.9.0'
     testImplementation 'org.junit.jupiter:junit-jupiter-engine:5.9.0'
+    testImplementation 'org.mockito:mockito-junit-jupiter:4.8.0'
+
+
 }
 
 test {
