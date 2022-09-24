@@ -1,6 +1,6 @@
 package com.kodilla.spring.shape;
 
-public class Main {
+public class KodillaSpringApplication {
     public static void main(String[] args) {
 
     }
