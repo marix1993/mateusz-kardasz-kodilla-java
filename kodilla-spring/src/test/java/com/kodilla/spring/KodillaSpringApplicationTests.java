@@ -1,8 +1,6 @@
 package com.kodilla.spring;
 
-import com.kodilla.spring.shape.Circle;
 import com.kodilla.spring.shape.Shape;
-import com.kodilla.spring.shape.Triangle;
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.context.ApplicationContext;
@@ -10,15 +8,16 @@ import org.springframework.context.annotation.AnnotationConfigApplicationContext
 
 import static org.junit.jupiter.api.Assertions.*;
 
-@SpringBootTest(classes = KodillaSpringApplicationTests.class) // spytać czemu tutaj dodaje się classes
 
-class KodillaSpringApplicationTests {
+@SpringBootTest (classes = KodillaApplicationTests.class)
+class KodillaApplicationTests {
 
     @Test
     void testCircleLoadedIntoContainer() {
         //Given
-        ApplicationContext context = new AnnotationConfigApplicationContext("com.kodilla.spring");
-        Shape shape = context.getBean(Circle.class);
+        ApplicationContext context =
+                new AnnotationConfigApplicationContext("com.kodilla.spring");
+        Shape shape = (Shape)context.getBean("circle");
 
         //When
         String name = shape.getShapeName();
@@ -30,8 +29,9 @@ class KodillaSpringApplicationTests {
     @Test
     void testTriangleLoadedIntoContainer() {
         //Given
-        ApplicationContext context = new AnnotationConfigApplicationContext("com.kodilla.spring");
-        Shape shape = context.getBean(Triangle.class);
+        ApplicationContext context =
+                new AnnotationConfigApplicationContext("com.kodilla.spring");
+        Shape shape = (Shape)context.getBean("triangle");
 
         //When
         String name = shape.getShapeName();
@@ -41,7 +41,30 @@ class KodillaSpringApplicationTests {
     }
 
     @Test
-    void contextLoads() {
+    void testSquareLoadedIntoContainer() {
+        //Given
+        ApplicationContext context =
+                new AnnotationConfigApplicationContext("com.kodilla.spring");
+        Shape shape = (Shape)context.getBean("createSquare");
+
+        //When
+        String name = shape.getShapeName();
+
+        //Then
+        assertEquals("This is a square.", name);
     }
 
+    @Test
+    void testShapeLoadedIntoContainer() {
+        //Given
+        ApplicationContext context =
+                new AnnotationConfigApplicationContext("com.kodilla.spring");
+        Shape shape = (Shape)context.getBean("chosenShape");
+
+        //When
+        String name = shape.getShapeName();
+
+        //Then
+        System.out.println("Chosen shape says: " + name);
+    }
 }
