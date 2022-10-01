@@ -5,7 +5,7 @@ import java.util.Optional;
 public class User {
 
     public class OptionalExample {
-        public  void main(String[] args) {
+        public void main(String[] args) {
             User user = new User();
 
             Optional<User> optionalUser = Optional.ofNullable(user);
