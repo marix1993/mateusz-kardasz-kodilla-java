@@ -9,7 +9,7 @@ import org.springframework.context.annotation.AnnotationConfigApplicationContext
 import static org.junit.jupiter.api.Assertions.*;
 
 
-@SpringBootTest (classes = KodillaApplicationTests.class)
+@SpringBootTest(classes = KodillaApplicationTests.class)
 class KodillaApplicationTests {
 
     @Test
